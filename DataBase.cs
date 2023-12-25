@@ -105,4 +105,16 @@ public class DataBase : IPersistable
 
         return _feedbacks.Where(fb => fb.UserId.Equals(user.Id));
     }
+
+    public User GetUserByFeedbackID(Guid idFeedback)
+    {
+        Feedback? feedback = _feedbacks.FirstOrDefault (fb => fb.Id.Equals(idFeedback));
+
+        if(feedback is null)
+        {
+            throw new ArgumentException("Feedback not found", nameof(idFeedback));
+        }
+
+        return _users.Find(us => us.Id.Equals(feedback.UserId))!;
+    }
 }
