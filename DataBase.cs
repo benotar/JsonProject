@@ -12,7 +12,7 @@ public class DataBase : IPersistable
 
     private const string _usersFileName = "users.json";
 
-    private const string _feedbakcsFileName = "feedback.json";
+    private const string _feedbakcsFileName = "feedbacks.json";
 
     public DataBase()
     {
@@ -117,4 +117,17 @@ public class DataBase : IPersistable
 
         return _users.Find(us => us.Id.Equals(feedback.UserId))!;
     }
+
+    // Повернути середній рейтинг відгуку
+    public double GetAverageRating()
+    {
+        uint sum = 0;
+        foreach (var feedback in _feedbacks)
+        {
+            sum += feedback.Rating;
+        }
+
+        return (double)sum / _feedbacks.Count;
+    }
+
 }
