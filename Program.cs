@@ -4,7 +4,7 @@ using Sharp.Entities;
 
 var database = new DataBase();
 
-database.LoadToFile();
+//database.LoadToFile();
 
 //foreach(Feedback feedback in database.GetFeedbackByUserName("benotar"))
 //{

@@ -108,9 +108,9 @@ public class DataBase : IPersistable
 
     public User GetUserByFeedbackID(Guid idFeedback)
     {
-        Feedback? feedback = _feedbacks.FirstOrDefault (fb => fb.Id.Equals(idFeedback));
+        Feedback? feedback = _feedbacks.FirstOrDefault(fb => fb.Id.Equals(idFeedback));
 
-        if(feedback is null)
+        if (feedback is null)
         {
             throw new ArgumentException("Feedback not found", nameof(idFeedback));
         }
@@ -128,6 +128,13 @@ public class DataBase : IPersistable
         }
 
         return (double)sum / _feedbacks.Count;
+    }
+
+    // Delete user by id + automatically delete all reviews he wrote
+    public void DeleteUser(Guid userId)
+    {
+        _users.RemoveAll(user => user.Id.Equals(userId));
+        _feedbacks.RemoveAll(feedback => feedback.UserId.Equals(userId));
     }
 
 }
